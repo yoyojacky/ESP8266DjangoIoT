@@ -1,0 +1,114 @@
+{% load static %}
+{% include 'header.html' %}
+
+<div id="wrapper">
+		<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+			<!-- 顶部logo -->
+			<div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="../home.html">个人空气质量统计平台</a>
+            </div>
+            <!-- 用户设置图标 -->
+            <ul class="nav navbar-top-links navbar-right">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-user fa-fw"></i> {{username}} <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li><a href="logout.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-user -->
+                </li>
+                <!-- /.dropdown -->
+            </ul>
+
+    </nav>
+</div>
+<!--展示区-->
+<div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">空气质量数据</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+                 <!-- /.col-lg-6 -->
+	            <div class="col-lg-12">
+	                    <div class="panel panel-default">
+	                        <div class="panel-heading">
+	                        </div>
+	                        <!-- /.panel-heading -->
+	                        <div class="panel-body">
+	                            <div class="table-responsive">
+                                
+	                                <table class="table">
+	                                    <thead>
+                                            <colgroup>
+                                                <col style>
+                                                <col style>
+                                                <col style>
+                                                <col style>
+                                                <col style>
+                                                <col style="width:50%">
+                                            </colgroup>
+	                                        <tr>
+	                                            <th>时间</th>
+	                                            <th>温度</th>
+	                                            <th>湿度</th>
+	                                            <th>pm1.0</th>
+	                                            <th>pm2.5</th>
+	                                            <th>pm10</th>
+	                                        </tr>
+	                                    </thead>
+	                                    <tbody>
+	                      
+	                                    {% for airdata in airdatas %}
+	                                        {% if takes.t_status == 0  %}
+                                                <tr onclick="location.href="{{ takes.t_name }}" class="warning">    
+                                            {% elif takes.t_status == 1 %}
+                                                <tr onclick="location.href="{{ takes.t_name }}" class="success">
+                                            {% elif takes.t_status == 2 %}
+                                                <tr onclick="location.href="{{ takes.t_name }}" class="info">
+                                            {% elif takes.t_status == 3 %}
+                                                <tr onclick="location.href="{{ takes.t_name }}" class="danger">
+                                            {% endif %}
+	                                            <td>{{ airdata.gettime }}</td>
+	                                            <td>{{ airdata.temperature }}°C</td>
+	                                            <td>{{ airdata.humidity }}%</td>
+	                                            <td>{{ airdata.pm1 }}</td>
+	                                            <td>{{ airdata.pm25 }}</td>
+                                                <td>{{ airdata.pm10 }}</td>
+	                                        </tr>
+
+	                                     {% endfor %}
+	                                    </tbody>
+	                                </table>
+                                    
+	                            </div>
+	                            <!-- /.table-responsive -->
+	                        </div>
+	                        <!-- /.panel-body -->
+	                    </div>
+	                    <!-- /.panel -->
+	                </div>
+	                <!-- /.col-lg-6 -->
+            </div>
+                
+<script language="JavaScript"> 
+function myrefresh(){ 
+window.location.reload(); 
+} 
+setTimeout('myrefresh()',6000000); //指定1秒刷新一次 
+</script>
+
+{% include 'footer.html' %}
