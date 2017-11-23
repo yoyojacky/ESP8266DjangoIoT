@@ -15,10 +15,13 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+from django.conf.urls.static import static
+from django.conf import settings
+
 import dev_ac.views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^dev_list/',dev_ac.views.dev_list),
     url(r'^dev_heartbeat/',dev_ac.views.dev_heartbeat),
-]
+]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

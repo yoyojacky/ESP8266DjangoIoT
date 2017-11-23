@@ -57,7 +57,7 @@
                             <form action=""  class="form-inline" role="form" method='POST'>
 
                                 <div class="form-group">
-                                    <label >电桩列表</label>
+                                    <label >{{table_name}}</label>
                                 </div>
     
                             </form>
@@ -82,14 +82,8 @@
 
                                 {% for td in table_list %}
                                                 <td>{{ td.dev_name }}</td>
-                                                <td>{{ td.dev_addr}}</td>
-                                                <td>{{ td.qrcode_id}}</td>
-                                                <td>{{ td.uptime}}</td>
-                                                <td>{{ td.dev_imei}}</td>
-                                                <td>{{ td.dev_csq}}</td>
-                                                <td>{{ td.dev_wanaddr }}</td>
+                                                <td>{{ td.dev_mac}}</td>
                                                 <td>{{ td.dev_last_time }}</td>
-                                                <td><a href="../dev_edit/?imei={{ td.dev_imei }}">编辑</a></td>
                                    </tr>
                                {% endfor %}
                                 </tbody>          
